@@ -4,14 +4,14 @@
 using namespace std;
 
 LRESULT CALLBACK MainWinProc(HWND,UINT,WPARAM,LPARAM);
-#define ID_MYBUTTON 1    /* идентификатор для кнопочки внутри главного окна */
+#define ID_MYBUTTON 1    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
 #define ID_MYBUTTON2 2
 
 HINSTANCE hInst;
 string str = "";
 LPCSTR buf;
 int WINAPI WinMain(HINSTANCE hInst,HINSTANCE,LPSTR,int ss) {
- 	/* создаем и регистрируем класс главного окна */
+ 	/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
  	WNDCLASS wc;
  	wc.style=0;
  	wc.lpfnWndProc=MainWinProc;
@@ -24,14 +24,14 @@ int WINAPI WinMain(HINSTANCE hInst,HINSTANCE,LPSTR,int ss) {
  	wc.lpszClassName="Example";
  	if (!RegisterClass(&wc)) return FALSE;
 
- 	/* создаем главное окно и отображаем его */
+ 
  	HWND hMainWnd=CreateWindow("Example","EXAMPLE 4",WS_OVERLAPPEDWINDOW,
   	CW_USEDEFAULT,CW_USEDEFAULT,530,120,NULL,NULL,hInst,NULL);
  	if (!hMainWnd) return FALSE;
  	ShowWindow(hMainWnd,ss);
  	UpdateWindow(hMainWnd);
 
- 	MSG msg; /* цикл обработки событий */
+ 	MSG msg; 
  	while (GetMessage(&msg,NULL,0,0)) {
   		TranslateMessage(&msg); 
   		DispatchMessage(&msg); 
@@ -45,9 +45,9 @@ LRESULT CALLBACK MainWinProc(HWND hw,UINT msg,WPARAM wp,LPARAM lp) {
  	switch (msg) {
   		case WM_CREATE:
    
-   			CreateWindow("button","ТЫК-ТЫК-ТЫК-ТЫК-ТЫК-ТЫК-ТЫК-ТЫК",WS_CHILD|BS_PUSHBUTTON|WS_VISIBLE,
+   			CreateWindow("button","1",WS_CHILD|BS_PUSHBUTTON|WS_VISIBLE,
    	 		5,10,250,20,hw,(HMENU)ID_MYBUTTON,NULL,NULL);
-   	 		CreateWindow("button","ТЫК-Тык",WS_CHILD|BS_PUSHBUTTON|WS_VISIBLE,
+   	 		CreateWindow("button","2",WS_CHILD|BS_PUSHBUTTON|WS_VISIBLE,
    	 		260,10,250,20,hw,(HMENU)ID_MYBUTTON2,NULL,NULL);
     
     		textBox = CreateWindow("static", "",
@@ -69,7 +69,7 @@ LRESULT CALLBACK MainWinProc(HWND hw,UINT msg,WPARAM wp,LPARAM lp) {
 					return 0;
 				}
    			if ((HIWORD(wp)==0) && (LOWORD(wp)==ID_MYBUTTON2)){
-			   	str += "Тык-Тык ";
+			   	str += "returned ";
 			   	buf = (LPCSTR)(str.c_str());
 				SetWindowText(textBox, buf);
 				return 0;
