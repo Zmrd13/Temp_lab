@@ -4,7 +4,7 @@
 using namespace std;
 
 LRESULT CALLBACK MainWinProc(HWND,UINT,WPARAM,LPARAM);
-#define ID_MYBUTTON1 1   /* идентификатор для кнопочки внутри главного окна */
+#define ID_MYBUTTON1 1   
 #define ID_MYBUTTON2 2
 #define ID_MYBUTTON3 3
 #define ID_MYBUTTON4 4
@@ -25,7 +25,7 @@ LPCSTR buf;
 HINSTANCE hInst;
 bool flagNull = 0, haveSign = 0;
 
-string to_string(double value)
+string _to_string(double value)
     {
         char buffer[100] = {};
 		sprintf(buffer, "%f", value);
@@ -34,7 +34,7 @@ string to_string(double value)
     }
 
 int WINAPI WinMain(HINSTANCE hInst,HINSTANCE,LPSTR,int ss) {
- 	/* создаем и регистрируем класс главного окна */
+ 	
  	WNDCLASS wc;
  	wc.style=0;
  	wc.lpfnWndProc=MainWinProc;
@@ -47,14 +47,13 @@ int WINAPI WinMain(HINSTANCE hInst,HINSTANCE,LPSTR,int ss) {
  	wc.lpszClassName="Example 4 MainWnd Class";
  	if (!RegisterClass(&wc)) return FALSE;
 
- 	/* создаем главное окно и отображаем его */
  	HWND hMainWnd=CreateWindow("Example 4 MainWnd Class","CALC",WS_OVERLAPPEDWINDOW,
   	CW_USEDEFAULT,CW_USEDEFAULT,180,270,NULL,NULL,hInst,NULL);
  	if (!hMainWnd) return FALSE;
  	ShowWindow(hMainWnd,ss);
  	UpdateWindow(hMainWnd);
 
- 	MSG msg; /* цикл обработки событий */
+ 	MSG msg; 
  	while (GetMessage(&msg,NULL,0,0)) {
   		TranslateMessage(&msg); 
   		DispatchMessage(&msg); 
@@ -62,12 +61,12 @@ int WINAPI WinMain(HINSTANCE hInst,HINSTANCE,LPSTR,int ss) {
  	return msg.wParam; 
 }
 
-/* процедура обработки сообщений для главного окна */
+
 LRESULT CALLBACK MainWinProc(HWND hw,UINT msg,WPARAM wp,LPARAM lp) {
 	static HWND text;
  	switch (msg) {
   		case WM_CREATE:{
-   			/* при создании окна внедряем в него кнопочку */
+   	
    			CreateWindow("button","1",WS_CHILD|BS_PUSHBUTTON|WS_VISIBLE,
     		5,5,50,20,hw,(HMENU)ID_MYBUTTON1,NULL,NULL);
     
@@ -429,7 +428,7 @@ LRESULT CALLBACK MainWinProc(HWND hw,UINT msg,WPARAM wp,LPARAM lp) {
 							else if(sign == '/')
 									rez = a / b;
 					
-					str = to_string(rez);
+					str = _to_string(rez);
 					buf = (LPCSTR)(str.c_str());
 					SetWindowText(text, buf);
 					COPYDATASTRUCT data;
@@ -456,7 +455,7 @@ LRESULT CALLBACK MainWinProc(HWND hw,UINT msg,WPARAM wp,LPARAM lp) {
     		return 0;
    		}
   	case WM_DESTROY:
-   /* пользователь закрыл окно, программа может завершаться */
+   /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
    		PostQuitMessage(0);
    		return 0;
  	}
